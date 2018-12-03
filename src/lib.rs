@@ -1,5 +1,3 @@
-//! # Tokio Async/Await Test
-//!
 //! This is a simple crate that provides a procedural macro similar to `#[test]` that will run the test as a single future on a tokio runtime.
 //!
 //! # Usage
@@ -60,6 +58,7 @@ extern crate quote;
 use proc_macro::TokenStream;
 use syn::{parse_macro_input, ItemFn};
 
+/// Run a future as a test, this expands to calling the `async fn` via `Runtime::block_on`.
 #[proc_macro_attribute]
 pub fn async_test(_attr: TokenStream, input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as ItemFn);
@@ -83,6 +82,8 @@ pub fn async_test(_attr: TokenStream, input: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 
+/// Run a future as a test, this expands to calling the `async fn` via `Runtime::block_on` with
+/// the `current_thread::Runtime::block_on`.
 #[proc_macro_attribute]
 pub fn async_current_thread_test(_attr: TokenStream, input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as ItemFn);
