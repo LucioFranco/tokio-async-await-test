@@ -1,5 +1,7 @@
 # Tokio Async/Await Test
 
+[![Build Status](https://travis-ci.org/LucioFranco/tokio-async-await-test.svg?branch=master)](https://travis-ci.org/LucioFranco/tokio-async-await-test)
+
 This is a simple crate that provides a procedural macro similar to `#[test]` that will run the test as a single future on a tokio runtime.
 
 # Usage
