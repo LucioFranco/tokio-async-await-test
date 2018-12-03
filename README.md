@@ -1,6 +1,15 @@
 # Tokio Async/Await Test
 
-[![Build Status](https://travis-ci.org/LucioFranco/tokio-async-await-test.svg?branch=master)](https://travis-ci.org/LucioFranco/tokio-async-await-test)
+[![Build Status][s1]][tc] [![Crates.io][s2]][ci] [![docs page][docs-badge]][docs] [![MIT/Apache][s3]][li]
+
+[s1]: https://travis-ci.org/LucioFranco/tokio-async-await-test.svg?branch=master
+[s2]: https://img.shields.io/crates/v/tokio-async-await-test.svg
+[docs-badge]: https://docs.rs/tokio-async-await-test/badge.svg
+[docs]: https://docs.rs/tokio-async-await-test
+[s3]: https://img.shields.io/badge/license-MIT%2FApache-blue.svg
+[tc]: https://travis-ci.org/LucioFranco/tokio-async-await-test
+[ci]: https://crates.io/crates/tokio-async-await-test/
+[li]: https://github.com/LucioFranco/tokio-async-await-test/tree/master/license
 
 This is a simple crate that provides a procedural macro similar to `#[test]` that will run the test as a single future on a tokio runtime.
 
