@@ -19,7 +19,7 @@ First, you must be on nightly rust as of `12-02-2018`. Add the crate to your `Ca
 
 ``` toml
 [dependencies]
-tokio-async-await-test = { git = "https://github.com/LucioFranco/tokio-async-await-test" }
+tokio-async-await-test = "0.1"
 ```
 
 This will give you the crate but you will also need to make sure that you also have `futures-preview` and `tokio` as dependencies like so.
