@@ -1,4 +1,4 @@
-#![feature(pin, async_await, await_macro, futures_api)]
+#![feature(async_await, await_macro, futures_api)]
 
 extern crate futures;
 extern crate tokio;

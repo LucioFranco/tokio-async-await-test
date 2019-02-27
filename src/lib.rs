@@ -2,7 +2,7 @@
 //!
 //! # Usage
 //!
-//! First, you must be on nightly rust as of `12-02-2018`. Add the crate to your `Cargo.toml`.
+//! First, you must be on nightly rust as of `2019-02-15`. Add the crate to your `Cargo.toml`.
 //!
 //! ``` toml
 //! [dependencies]
@@ -20,7 +20,7 @@
 //! Once, you have all these dependencies you can then use the attribute like so.
 //!
 //! ``` rust
-//! #![feature(pin, async_await, await_macro, futures_api)]
+//! #![feature(async_await, await_macro, futures_api)]
 //!
 //! extern crate futures;
 //! extern crate tokio;
@@ -48,7 +48,7 @@
 //!
 //! You can also use a current thread runtime by importing `use tokio_async_await_test::async_current_thread_test;`.
 
-#![feature(pin, async_await, await_macro, futures_api)]
+#![feature(async_await, await_macro, futures_api)]
 
 extern crate proc_macro;
 
