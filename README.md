@@ -15,7 +15,7 @@ This is a simple crate that provides a procedural macro similar to `#[test]` tha
 
 # Usage
 
-First, you must be on nightly rust as of `12-02-2018`. Add the crate to your `Cargo.toml`.
+First, you must be on nightly rust as of `2019-02-15`. Add the crate to your `Cargo.toml`.
 
 ``` toml
 [dependencies]
@@ -32,7 +32,7 @@ futures-preview = { version = "0.3.0-alpha.10", features = ["tokio-compat"] }
 Once, you have all these dependencies you can then use the attribute like so.
 
 ``` rust
-#![feature(pin, async_await, await_macro, futures_api)]
+#![feature(async_await, await_macro, futures_api)]
 
 extern crate futures;
 extern crate tokio;
@@ -53,7 +53,7 @@ This will spin up a tokio runtime and block on the `basic` function. This genera
 fn basic() {
 	// -- snip --
     let mut rt = Runtime::new().unwrap();
-	
+
 	rt.block_on(fut().unit_error().boxed().compat()).unwrap();
 }
 ```
