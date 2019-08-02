@@ -13,42 +13,26 @@
 //! `futures-preview` and `tokio` as dependencies like so.
 //!
 //! ``` toml
-//! tokio = { version = "0.1", features = ["async-await-preview"] }
-//! futures-preview = { version = "0.3.0-alpha.10", features = ["tokio-compat"] }
+//! futures-preview = { version = "0.3.0-alpha.17" }
 //! ```
 //!
 //! Once, you have all these dependencies you can then use the attribute like so.
 //!
 //! ``` rust
-//! #![feature(async_await, await_macro, futures_api)]
+//! #![feature(async_await)]
 //!
 //! extern crate futures;
-//! extern crate tokio;
-//! extern crate tokio_async_await_test;
+//! extern crate async_await_test;
 //!
-//! use tokio_async_await_test::async_test;
+//! use async_await_test::async_test;
 //!
 //! #[async_test]
 //! async fn basic() {
-//!     await!(example_async_fn());
+//!     example_async_fn().await;
 //! }
 //! ```
-//!
-//! This will spin up a tokio runtime and block on the `basic` function. This generally expands to look like this. Where `fut` is the test future you are running.
-//!
-//! ``` rust
-//! #[test]
-//! fn basic() {
-//! 	// -- snip --
-//!     let mut rt = Runtime::new().unwrap();
-//!
-//! 	rt.block_on(fut().unit_error().boxed().compat()).unwrap();
-//! }
-//! ```
-//!
-//! You can also use a current thread runtime by importing `use tokio_async_await_test::async_current_thread_test;`.
 
-#![feature(async_await, await_macro, futures_api)]
+#![feature(async_await)]
 
 extern crate proc_macro;
 
@@ -68,39 +52,10 @@ pub fn async_test(_attr: TokenStream, input: TokenStream) -> TokenStream {
     let expanded = quote! {
         #[test]
         fn #test_case_name () {
-            use tokio::runtime::Runtime;
-            use futures::future::{FutureExt, TryFutureExt};
-
-            let mut rt = Runtime::new().unwrap();
+            use futures::executor;
 
             #input
-
-            rt.block_on(#test_case_name().unit_error().boxed().compat()).unwrap();
-        }
-    };
-
-    TokenStream::from(expanded)
-}
-
-/// Run a future as a test, this expands to calling the `async fn` via `Runtime::block_on` with
-/// the `current_thread::Runtime::block_on`.
-#[proc_macro_attribute]
-pub fn async_current_thread_test(_attr: TokenStream, input: TokenStream) -> TokenStream {
-    let input = parse_macro_input!(input as ItemFn);
-
-    let test_case_name = input.ident.clone();
-
-    let expanded = quote! {
-        #[test]
-        fn #test_case_name () {
-            use tokio::runtime::current_thread::Runtime;
-            use futures::future::{FutureExt, TryFutureExt};
-
-            let mut rt = Runtime::new().unwrap();
-
-            #input
-
-            rt.block_on(#test_case_name().unit_error().boxed().compat()).unwrap();
+            executor::block_on(#test_case_name())
         }
     };
 
